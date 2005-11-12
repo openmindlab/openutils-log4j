@@ -1,0 +1,32 @@
+                                 --------------------------
+                                      O p e n u t i l s
+                                 --------------------------
+                                     Fabrizio Giustina
+                                 --------------------------
+
+openutils-log4j
+
+ The openutils-log4j project offer a few useful extensions for log4j.
+ At this moment you will find:
+
+ * {{{smtpappender.html}an extension to the standard log4j SMTP appender}}
+
+ * {{{filteredlayout.html}an extended pattern layout that can filter specific stack frames}}
+
+ * {{{servlet.html}a ready to use configuration servlet that let you change logging levels on the fly}}
+
+ []
+
+
+maven
+
+ Openutils-log4j is built using maven 2. If you want to use openutils-log4j in your application you can declare the
+ dependency as:
+
++----------------------------------------------+
+    <dependency>
+        <groupId>net.sourceforge.openutils</groupId>
+        <artifactId>openutils-log4j</artifactId>
+        <version>1.0</version>
+    </dependency>
++----------------------------------------------+

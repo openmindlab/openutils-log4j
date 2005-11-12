@@ -1,0 +1,73 @@
+                                 --------------------------
+                                      O p e n u t i l s
+                                 --------------------------
+                                     Fabrizio Giustina
+                                 --------------------------
+
+Log4jConfigurationServlet
+
+ This is nothing more than a modified version of a configuration servlet that can be found in the log4j sandbox.
+ The servlet allow you to see the configured log4j loggers and change their level at runtime.
+
+ You can see the references to this configuration servlet in the log4j wiki, at the
+ {{{http://wiki.apache.org/logging-log4j/Log4jv13Features}Log4j 1.3 Features}} pages and at the
+ {{{http://wiki.apache.org/logging-log4j/UsefulCode}useful code}} page.
+
+ The servlet is available in the sandbox from years, but:
+
++--------------------------------------------------+
+ Web Application - Servlet related log4j classes can be found in the current log4j cvs at ...
+ They will be released, in some packaged form, with v1.3, but they are compatible with the current v1.2.X.
++--------------------------------------------------+
+
+ If you are tired to wait for log4j 1.3 to be released for a ready-to-use package and you don't want
+ to copy that java file in every project source folder, now you can use openutils-log4j.
+
+ The following enhancements have been added to the original servlet:
+
+ * Ability to sort loggers by name or level
+
+ * Easy level modification (with a select near each logger)
+
+ * Clean xhtml strict output (styled using css)
+
+ * configurable partial output (via servlet init parameter) which lets you use this servlet in portal environments or tiles
+
+ []
+
+
+* Configuration
+
+ This is a sample web.xml configuration:
+
++--------------------------------------------------+
+ <servlet>
+   <servlet-name>log4j</servlet-name>
+   <display-name>Log4j configuration Servlet</display-name>
+   <servlet-class>it.openutils.log4j.Log4jConfigurationServlet</servlet-class>
+ </servlet>
++--------------------------------------------------+
+
+ The fragment parameter can be added if you don't want a full xhtml page in output, but only the content of the body tag,
+ so that it can be used in portlets or struts tiles.
+
++--------------------------------------------------+
+ <servlet>
+   <servlet-name>log4j</servlet-name>
+   <display-name>Log4j configuration Servlet</display-name>
+   <servlet-class>it.openutils.log4j.Log4jConfigurationServlet</servlet-class>
+   <init-param>
+     <param-name>fragment</param-name>
+     <param-value>true</param-value>
+   </init-param>
+ </servlet>
++--------------------------------------------------+
+
+
+* See it
+
+ This is how the servlet will look.
+
+[images/servlet.png] log4j configuration servlet screenshot
+
+

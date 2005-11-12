@@ -1,0 +1,93 @@
+                                 --------------------------
+                                      O p e n u t i l s
+                                 --------------------------
+                                     Fabrizio Giustina
+                                 --------------------------
+
+DynamicSubjectSMTPAppender
+
+ Log4j already offers a nice {{{http://logging.apache.org/log4j/docs/api/org/apache/log4j/net/SMTPAppender.html}SMTPAppender}}
+ that can be used to send error messages by mail.
+
+ Unfortunately, the <<<org.apache.log4j.net.SMTPAppender>>> doesn't allow you to compose the mail subject from the log message.
+ This is pretty annoying when you start receiving many messages by mail and you have to go through any of them in order
+ to understand which are duplicates and what the gravity is.
+ Also worste, if you are using gmail you will only see a single discussion with all the log messages.
+
+ This is a sample <<<org.apache.log4j.net.SMTPAppender>>> configuration:
+
++----------------------------------------------+
+
+    <appender name="mail" class="org.apache.log4j.net.SMTPAppender">
+        <param name="Threshold" value="ERROR" />
+        <param name="To" value="logs@example.com" />
+        <param name="From" value="info@example.com" />
+        <param name="SMTPHost" value="localhost" />
+        <param name="BufferSize" value="1" />
+        <param name="Subject" value="[EXAMPLE] error" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p  %c %d{dd.MM.yyyy HH:mm:ss} -- %m%n" />
+        </layout>
+    </appender>
+
++----------------------------------------------+
+
+ And this is how you mailbox will look after some errors:
+
++----------------------------------------------+
+  Subject                                    Read            Sender                Date
+  [EXAMPLE] error                            *               info@example.com      2005-11-09 22:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-09 22:34
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] error                            *               info@example.com      2005-11-10 10:33
++----------------------------------------------+
+
+ The <<<DynamicSubjectSMTPAppender>>> let you specify a pattern to use for the mail subject, just like you do for the log
+ message.
+ You will only need to change the appender <<class>> and the <<Subject>> param. You can use any standard log4j pattern
+ in Subject.
+
++----------------------------------------------+
+
+    <appender name="mail" class="it.openutils.log4j.DynamicSubjectSMTPAppender">
+        <param name="Threshold" value="ERROR" />
+        <param name="To" value="logs@example.com" />
+        <param name="From" value="info@example.com" />
+        <param name="SMTPHost" value="localhost" />
+        <param name="BufferSize" value="1" />
+        <param name="Subject" value="[EXAMPLE] %m" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p  %c %d{dd.MM.yyyy HH:mm:ss} -- %m%n" />
+        </layout>
+    </appender>
+
++----------------------------------------------+
+
+ With this configuration the log message (<<<%m>>>) is used for the mail subject and errors will now be delivered as:
+
++----------------------------------------------+
+  Subject                                    Read            Sender                Date
+  [EXAMPLE] FileNotFound: do.properties      *               info@example.com      2005-11-09 22:33
+  [EXAMPLE] OutOfMemory caught during ...    *               info@example.com      2005-11-09 22:34
+  [EXAMPLE] Unable to initialize repository  *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] Unable to initialize repository  *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] Unable to initialize repository  *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] Error while closing Version ...  *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] NullPointerException ...         *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] JasperException: unable to ...   *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] JasperException: unable to ...   *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] JasperException: unable to ...   *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] Config exception: missing ...    *               info@example.com      2005-11-10 10:33
+  [EXAMPLE] can't activate                   *               info@example.com      2005-11-10 10:33
++----------------------------------------------+
+
+ ... and using gmail (or any thread-enabled mail client) you will actually see a single entry for each error, excluding
+ duplicated ones.

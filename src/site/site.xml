@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Openutils">
+    <title>Openutils</title>
+    <bannerRight>
+        <name>Openutils</name>
+        <href>http://openutils.sourceforge.net</href>
+    </bannerRight>
+    <bannerLeft>
+        <name>Sourceforge</name>
+        <src>http://sourceforge.net/sflogo.php?group_id=150467&amp;amp;type=2</src>
+        <href>http://www.sourceforge.net/projects/openutils</href>
+    </bannerLeft>
+    <body>
+        <menu name="Guide">
+            <item name="smtp appender" href="smtpappender.html" />
+            <item name="filtered layout" href="filteredlayout.html" />
+            <item name="configuration servlet" href="servlet.html" />
+        </menu>
+        ${reports}
+    </body>
+</project>

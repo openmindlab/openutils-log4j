@@ -1,0 +1,119 @@
+                                 --------------------------
+                                      O p e n u t i l s
+                                 --------------------------
+                                     Fabrizio Giustina
+                                 --------------------------
+
+FilteredPatternLayout
+
+ While developing web applications you will often have to go through long stacktraces when an error is caught.
+ If you get an error in a jsp or controller you will at least go through a bunch of lines added by the application server
+ (tomcat, catalina, and jasper components if you are using tomcat) and by any of the j2ee filter added in web.xml.
+ Most of the time you are not interested at all in these entries and they make harder to find the interesting lines in
+ the stack.
+
+ A simple stack trace will probably be not shorter than the following:
+
++----------------------------------------------+
+NullPointerException
+Stacktrace:
+org.myapp.web.MyClass.doNpe(MyClass.java:99)
+org.myapp.web.MyClass.doSomething(MyClass.java:199)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+java.lang.reflect.Method.invoke(Method.java:324)
+org.myapp.web.MyClass.doOther(MyClass.java:349)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+java.lang.reflect.Method.invoke(Method.java:324)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:186)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:157)
+org.myapp.web.ControllerGeek.doSomething(ControllerGeek.java:38)
+org.myapp.web.ControllerGeek.doNot(ControllerGeek.java:99)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:186)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:157)
+javax.servlet.http.HttpServlet.service(HttpServlet.java:689)
+javax.servlet.http.HttpServlet.service(HttpServlet.java:802)
+org.myapp.web.filters.MessageFilter.doFilter(MessageFilter.java:36)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:237)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:157)
+com.opensymphony.module.sitemesh.filter.PageFilter.parsePage(PageFilter.java:118)
+com.opensymphony.module.sitemesh.filter.PageFilter.doFilter(PageFilter.java:52)
+org.myapp.web.filters.LoginFilter.doFilter(LoginFilter.java:36)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:186)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:157)
+org.myapp.web.filters.EncodingFilter.doFilter(EncodingFilter.java:36)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:186)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:157)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:214)
+org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+org.apache.catalina.core.StandardContextValve.invokeInternal(StandardContextValve.java:198)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:152)
+org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:137)
+org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:118)
+org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:102)
+org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+org.apache.catalina.core.ContainerBase.invoke(ContainerBase.java:929)
+org.apache.coyote.tomcat5.CoyoteAdapter.service(CoyoteAdapter.java:160)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:799)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.processConnection(Http11Protocol.java:705)
+org.apache.tomcat.util.net.TcpWorkerThread.runIt(PoolTcpEndpoint.java:577)
+org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:683)
+java.lang.Thread.run(Thread.java:534)
++----------------------------------------------+
+
+ As you can see most of the lines are useless for you in this stack trace... you already know than the execution flow
+ has gone throgh tomcat and through you filters, so you could just save some time by trimming down the stack to a
+ few interesting lines.
+
+ The <<<org.apache.log4j.ConsoleAppender>>> will do that for you. Just replace the <<class>> appender attribute
+ and add any number of <<Filter>> parameters.
+ This is a sample configuration:
+
++----------------------------------------------+
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="it.openutils.log4j.FilteredPatternLayout">
+            <param name="ConversionPattern" value="%-5p  %c %F(%M:%L) %d{dd.MM.yyyy HH:mm:ss}  %m%n" />
+            <param name="Filter" value="org.apache.catalina" />
+            <param name="Filter" value="org.apache.tomcat" />
+            <param name="Filter" value="org.apache.coyote" />
+            <param name="Filter" value="org.myapp.web.filters" />
+            <param name="Filter" value="com.opensymphony.module.sitemesh.filter" />
+            <param name="Filter" value="sun.reflect" />
+            <param name="Filter" value="javax.servlet.http" />
+        </layout>
+    </appender>
++----------------------------------------------+
+
+ ... and this will be the same stacktrace as above, purged from useless lines:
+
++----------------------------------------------+
+NullPointerException
+Stacktrace:
+org.myapp.web.MyClass.doNpe(MyClass.java:99)
+org.myapp.web.MyClass.doSomething(MyClass.java:199)
+org.myapp.web.MyClass.doOther(MyClass.java:349)
+org.myapp.web.ControllerGeek.doSomething(ControllerGeek.java:38)
+org.myapp.web.ControllerGeek.doNot(ControllerGeek.java:99)
+java.lang.Thread.run(Thread.java:534)
++----------------------------------------------+
+
+ This kind of configuration is particularly useful in development, while you will probably look at error messages in
+ your IDE console. Can also be useful in production in order to avoid uge log files or email messages (it can be used
+ together with the <<<DynamicSubjectSMTPAppender>>> appender provided by openutils).
+
+ <<Warning>>: be careful while configuring the stacktrace filters: having a trimmed down stacktrace often makes easier
+ to find errors, but if the error come from the classes you removed from the stacktrace you will never be able to find
+ the cause. For example if you are developing a servlet filter don't remove it from the stacktrace, also if it will
+ show up in all the stacktraces from the application. It's up to you too choose what is not useful between what you
+ commonly see in stacktraces.
+
