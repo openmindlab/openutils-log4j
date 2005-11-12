@@ -108,7 +108,7 @@ java.lang.Thread.run(Thread.java:534)
 +----------------------------------------------+
 
  This kind of configuration is particularly useful in development, while you will probably look at error messages in
- your IDE console. Can also be useful in production in order to avoid uge log files or email messages (it can be used
+ your IDE console. It can also be useful in production in order to avoid huge log files or email messages (it can be used
  together with the <<<DynamicSubjectSMTPAppender>>> appender provided by openutils).
 
  <<Warning>>: be careful while configuring the stacktrace filters: having a trimmed down stacktrace often makes easier
