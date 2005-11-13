@@ -1,5 +1,5 @@
 /*
- * Copyright 1999,2004 The Apache Software Foundation.
+ * Copyright 2005 Fabrizio Giustina..
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,8 +71,7 @@ import org.apache.log4j.Logger;
  * @author Luther E. Birdzell lebirdzell@yahoo.com
  * @author Yoav Shapira yoavs@apache.org
  * @author Fabrizio Giustina
- * @since 1.3
- * @version $Revision$ ($Author$)
+ * @version $Id$
  */
 public class Log4jConfigurationServlet extends HttpServlet
 {

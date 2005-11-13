@@ -1,1 +1,4 @@
 .wtpmodules
+.project
+.classpath
+target

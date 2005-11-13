@@ -5,8 +5,53 @@
     <groupId>net.sourceforge.openutils</groupId>
     <artifactId>openutils-log4j</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>Openutils for Log4j</name>
+    <version>1.0</version>
+    <name>openutils for Log4j</name>
+    <description>openutils log4j extensions</description>
+    <url>http://openutils.sourceforge.net</url>
+    <issueManagement>
+        <system>sourceforge</system>
+        <url>http://sourceforge.net/tracker/?group_id=150467&amp;atid=784057</url>
+    </issueManagement>
+    <scm>
+        <connection>
+            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/openutils:openutils-openutils-log4j
+        </connection>
+        <developerConnection>
+            scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/openutils:openutils-log4j
+        </developerConnection>
+        <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/openutils/openutils-log4j/</url>
+    </scm>
+    <organization>
+        <name>Fabrizio Giustina</name>
+        <url>http://openutils.sourceforge.net</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>Apache Software License</name>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>fgiust</id>
+            <name>Fabrizio Giustina</name>
+            <email>fgiust@apache.org</email>
+            <organization>openmind</organization>
+            <roles>
+                <role>Project admin and developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh-external</artifactId>
+            </extension>
+        </extensions>
+    </build>
     <dependencies>
         <dependency>
             <groupId>log4j</groupId>
@@ -17,6 +62,7 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.3.1</version>
+            <scope>optional</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -35,12 +81,12 @@
         <site>
             <id>default</id>
             <name>sourceforge</name>
-            <url>scp://shell.sourceforge.net/home/groups/o/op/openutils/htdocs/openutils-log4j</url>
+            <url>scpexe://shell.sourceforge.net/home/groups/o/op/openutils/htdocs/openutils-log4j</url>
         </site>
         <downloadUrl>http://prdownloads.sourceforge.net/150467</downloadUrl>
         <repository>
             <id>sourceforge</id>
-            <url>scp://shell.sourceforge.net/home/groups/o/op/openutils/htdocs/m2repo</url>
+            <url>scpexe://shell.sourceforge.net/home/groups/o/op/openutils/htdocs/m2repo</url>
         </repository>
     </distributionManagement>
 </project>

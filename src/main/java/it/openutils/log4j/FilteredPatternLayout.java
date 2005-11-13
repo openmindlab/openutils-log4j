@@ -1,3 +1,18 @@
+/*
+ * Copyright 2005 Fabrizio Giustina.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package it.openutils.log4j;
 
 import java.util.HashSet;
@@ -10,6 +25,20 @@ import org.apache.log4j.spi.ThrowableInformation;
 
 
 /**
+ * An extension of <code>org.apache.log4j.PatternLayout</code> which strips out from stack traces a list of configured
+ * entries. Sample configuration:
+ *
+ * <pre>
+ *  &lt;appender name="console" class="org.apache.log4j.ConsoleAppender">
+ *      &lt;layout class="it.openutils.log4j.FilteredPatternLayout">
+ *          &lt;param name="ConversionPattern" value="%-5p  %c %F(%M:%L) %d{dd.MM.yyyy HH:mm:ss}  %m%n" />
+ *          &lt;param name="Filter" value="org.apache.catalina" />
+ *          &lt;param name="Filter" value="sun.reflect" />
+ *          &lt;param name="Filter" value="javax.servlet.http" />
+ *      &lt;/layout>
+ *  &lt;/appender>
+ * </pre>
+ *
  * @author Fabrizio Giustina
  * @version $Id$
  */
