@@ -2,59 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd ">
   <modelVersion>4.0.0</modelVersion>
-	<parent>
-      <groupId>net.sourceforge.openutils</groupId>
-      <artifactId>openutils</artifactId>
-      <version>1.1-SNAPSHOT</version>
-      <relativePath>../openutils-parent</relativePath>
-    </parent>
-  <groupId>net.sourceforge.openutils</groupId>
+  <parent>
+    <groupId>net.sourceforge.openutils</groupId>
+    <artifactId>openutils</artifactId>
+    <version>2</version>
+    <relativePath>../openutils-parent</relativePath>
+  </parent>
   <artifactId>openutils-log4j</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
   <name>openutils for Log4j</name>
   <description>openutils log4j extensions</description>
-  <url>http://openutils.sourceforge.net</url>
-  <issueManagement>
-    <system>sourceforge</system>
-    <url>http://sourceforge.net/tracker/?group_id=150467&amp;atid=784057</url>
-  </issueManagement>
-  <scm>
-    <connection>scm:svn:https://svn.sourceforge.net/svnroot/openutils/trunk/openutils-log4j</connection>
-    <developerConnection>
-      scm:svn:https://svn.sourceforge.net/svnroot/openutils/trunk/openutils-log4j
-    </developerConnection>
-    <url>http://svn.sourceforge.net/viewcvs.cgi/openutils/trunk/openutils-log4j</url>
-  </scm>
-  <organization>
-    <name>Fabrizio Giustina</name>
-    <url>http://openutils.sourceforge.net</url>
-  </organization>
-  <licenses>
-    <license>
-      <name>Apache Software License</name>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <developers>
-    <developer>
-      <id>fgiust</id>
-      <name>Fabrizio Giustina</name>
-      <email>fgiust@apache.org</email>
-      <organization>openmind</organization>
-      <roles>
-        <role>Project admin and developer</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-  </developers>
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ssh-external</artifactId>
-      </extension>
-    </extensions>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -63,18 +22,6 @@
           <source>1.4</source>
           <target>1.4</target>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
@@ -103,40 +50,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>changes-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>surefire-report-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>changelog-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jxr-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </reporting>
-  <distributionManagement>
-    <site>
-      <id>default</id>
-      <name>sourceforge</name>
-      <url>scpexe://shell.sourceforge.net/home/groups/o/op/openutils/htdocs/openutils-log4j</url>
-    </site>
-    <downloadUrl>http://prdownloads.sourceforge.net/150467</downloadUrl>
-    <repository>
-      <id>sourceforge</id>
-      <url>scpexe://shell.sourceforge.net/home/groups/o/op/openutils/htdocs/m2repo</url>
-    </repository>
-  </distributionManagement>
 </project>
