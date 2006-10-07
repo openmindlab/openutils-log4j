@@ -10,7 +10,7 @@
   </parent>
   <artifactId>openutils-log4j</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <name>openutils for Log4j</name>
   <description>openutils log4j extensions</description>
   <build>
