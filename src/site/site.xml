@@ -15,6 +15,9 @@
       <item name="filtered layout" href="filteredlayout.html" />
       <item name="configuration servlet" href="servlet.html" />
     </menu>
-    ${reports}
+    <menu ref="reports" inherit="bottom" />
+    <head>
+      <style type="text/css" media="all">@import url(../css/site.css);</style>
+    </head>
   </body>
 </project>
