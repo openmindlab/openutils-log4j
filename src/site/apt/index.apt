@@ -27,6 +27,6 @@ maven
     <dependency>
         <groupId>net.sourceforge.openutils</groupId>
         <artifactId>openutils-log4j</artifactId>
-        <version>1.0</version>
+        <version>${project.version}</version>
     </dependency>
 +----------------------------------------------+
