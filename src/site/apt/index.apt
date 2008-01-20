@@ -18,7 +18,7 @@ openutils-log4j
  []
 
 
-maven
+Maven
 
  Openutils-log4j is built using maven 2. If you want to use openutils-log4j in your application you can declare the
  dependency as:
@@ -27,6 +27,11 @@ maven
     <dependency>
         <groupId>net.sourceforge.openutils</groupId>
         <artifactId>openutils-log4j</artifactId>
-        <version>${project.version}</version>
+        <version>...</version>
     </dependency>
 +----------------------------------------------+
+
+Released versions
+
+ Check it at {{{http://www.mvnrepository.com/artifact/net.sourceforge.openutils/openutils-log4j}http://www.mvnrepository.com/artifact/net.sourceforge.openutils/openutils-log4j}}
+
