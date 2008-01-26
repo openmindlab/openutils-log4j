@@ -1,2 +1,4 @@
 * text=auto !eol
+src/main/java/it/openutils/log4j/EnhancedDailyRollingFileAppender.java svneol=native#text/plain
+src/site/apt/fileppenders.apt svneol=native#text/plain
 src/site/resources/images/servlet.png -text

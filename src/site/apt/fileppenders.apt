@@ -1,0 +1,28 @@
+                                 --------------------------
+                                      O p e n u t i l s
+                                 --------------------------
+                                     Fabrizio Giustina
+                                 --------------------------
+
+EnhancedDailyRollingFileAppender
+
+ The standard org.apache.log4j.DailyRollingFileAppender lets you only add a suffix to the original log file name,
+renaming for example <<<error.log>>> to <<<error.log.2008-02-23>>>.
+
+ This appender also allow moving archived file to a different directory, by setting the <<<ArchiveDirectory>>> property
+ (default is <<<archive>>>)
+
+
+
++----------------------------------------------+
+  <appender name="log" class="it.openutils.log4j.EnhancedDailyRollingFileAppender">
+    <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+    <param name="ArchiveDirectory" value="archive" />
+    <param name="File" value="/data/logs/error.log" />
+    <param name="Threshold" value="INFO" />
+    <param name="Append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} %m%n" />
+    </layout>
+  </appender>
++----------------------------------------------+

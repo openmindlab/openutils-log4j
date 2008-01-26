@@ -15,6 +15,8 @@ openutils-log4j
 
  * {{{servlet.html}a ready to use configuration servlet that let you change logging levels on the fly}}
 
+ * {{{fileappenders.html} an extended version of the standard DailyRollingFileAppender}}
+
  []
 
 
