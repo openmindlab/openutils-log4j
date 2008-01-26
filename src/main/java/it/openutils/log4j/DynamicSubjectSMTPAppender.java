@@ -85,6 +85,14 @@ public class DynamicSubjectSMTPAppender extends SMTPAppender
                 if (this.subjectLayout != null)
                 {
                     String subject = this.subjectLayout.format(event);
+                    if (subject != null)
+                    {
+                        subject = subject.trim();
+                        if (subject.indexOf("\n") > 0)
+                        {
+                            subject = subject.substring(0, subject.indexOf("\n"));
+                        }
+                    }
                     this.msg.setSubject(subject);
                 }
 
