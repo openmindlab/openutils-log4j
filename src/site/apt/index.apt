@@ -24,3 +24,4 @@ Released versions
 
  Check it at {{{http://www.mvnrepository.com/artifact/net.sourceforge.openutils/openutils-log4j}http://www.mvnrepository.com/artifact/net.sourceforge.openutils/openutils-log4j}}
 
+ Warning: since release 2.0 openutils-log4j requires java 5 or higher
