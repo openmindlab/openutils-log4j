@@ -46,14 +46,14 @@ public class FilteredPatternLayout extends PatternLayout
 {
 
     /**
-     * Holds the list of filtered frames.
-     */
-    private Set filteredFrames = new HashSet();
-
-    /**
      * Line separator for stacktrace frames.
      */
     private static String lineSeparator = "\n";
+
+    /**
+     * Holds the list of filtered frames.
+     */
+    private Set<String> filteredFrames = new HashSet<String>();
 
     static
     {
@@ -68,16 +68,18 @@ public class FilteredPatternLayout extends PatternLayout
     }
 
     /**
-     * @see org.apache.log4j.Layout#ignoresThrowable()
+     * {@inheritDoc}
      */
+    @Override
     public boolean ignoresThrowable()
     {
         return false;
     }
 
     /**
-     * @see org.apache.log4j.PatternLayout#format(org.apache.log4j.spi.LoggingEvent)
+     * {@inheritDoc}
      */
+    @Override
     public String format(LoggingEvent event)
     {
 
@@ -130,10 +132,10 @@ public class FilteredPatternLayout extends PatternLayout
      */
     private boolean startsWithAFilteredPAttern(String string)
     {
-        Iterator iterator = filteredFrames.iterator();
+        Iterator<String> iterator = filteredFrames.iterator();
         while (iterator.hasNext())
         {
-            if (string.trim().startsWith((String) iterator.next()))
+            if (string.trim().startsWith(iterator.next()))
             {
                 return true;
             }

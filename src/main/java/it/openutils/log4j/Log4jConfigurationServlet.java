@@ -121,7 +121,7 @@ public class Log4jConfigurationServlet extends HttpServlet
         Level.WARN.toString(),
         Level.INFO.toString(),
         Level.DEBUG.toString(),
-        Level.ALL.toString()};
+        Level.ALL.toString() };
 
     /**
      * Don't include html head.
@@ -135,13 +135,21 @@ public class Log4jConfigurationServlet extends HttpServlet
      * @exception ServletException if an error occurs
      * @exception IOException if an error occurs
      */
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        String className = request.getParameter(PARAM_CLASS);
+        String level = request.getParameter(PARAM_LEVEL);
+
+        if (className != null && level != null)
+        {
+            setClass(className, level);
+        }
 
         String sortByLevelParam = request.getParameter(PARAM_SORTBYLEVEL);
         boolean sortByLevel = ("true".equalsIgnoreCase(sortByLevelParam) || "yes".equalsIgnoreCase(sortByLevelParam));
 
-        List loggers = getSortedLoggers(sortByLevel);
+        List<Logger> loggers = getSortedLoggers(sortByLevel);
         int loggerNum = 0;
 
         PrintWriter out = response.getWriter();
@@ -175,11 +183,11 @@ public class Log4jConfigurationServlet extends HttpServlet
         displayLogger(out, Logger.getRootLogger(), loggerNum++, request);
 
         // print the rest of the loggers
-        Iterator iterator = loggers.iterator();
+        Iterator<Logger> iterator = loggers.iterator();
 
         while (iterator.hasNext())
         {
-            displayLogger(out, (Logger) iterator.next(), loggerNum++, request);
+            displayLogger(out, iterator.next(), loggerNum++, request);
         }
 
         out.println("</tbody>");
@@ -201,16 +209,9 @@ public class Log4jConfigurationServlet extends HttpServlet
      * @exception ServletException if an error occurs
      * @exception IOException if an error occurs
      */
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String className = request.getParameter(PARAM_CLASS);
-        String level = request.getParameter(PARAM_LEVEL);
-
-        if (className != null)
-        {
-            setClass(className, level);
-        }
-
         doGet(request, response);
     }
 
@@ -284,11 +285,12 @@ public class Log4jConfigurationServlet extends HttpServlet
      * @param sortByLevel if <code>true</code> sort loggers by level instead of name.
      * @return List the list of sorted loggers.
      */
-    private List getSortedLoggers(boolean sortByLevel)
+    @SuppressWarnings("unchecked")
+    private List<Logger> getSortedLoggers(boolean sortByLevel)
     {
-        Enumeration enm = LogManager.getCurrentLoggers();
-        Comparator comp = new LoggerComparator(sortByLevel);
-        List list = new ArrayList();
+        Enumeration<Logger> enm = LogManager.getCurrentLoggers();
+
+        List<Logger> list = new ArrayList<Logger>();
 
         // Add all current loggers to the list
         while (enm.hasMoreElements())
@@ -297,7 +299,7 @@ public class Log4jConfigurationServlet extends HttpServlet
         }
 
         // sort the loggers
-        Collections.sort(list, comp);
+        Collections.sort(list, new LoggerComparator(sortByLevel));
 
         return list;
     }
@@ -354,7 +356,7 @@ public class Log4jConfigurationServlet extends HttpServlet
     /**
      * Compare the names of two <code>Logger</code>s. Used for sorting.
      */
-    private class LoggerComparator implements Comparator
+    private class LoggerComparator implements Comparator<Logger>
     {
 
         /**
@@ -377,11 +379,8 @@ public class Log4jConfigurationServlet extends HttpServlet
          * @param object2 an <code>Object</code> value
          * @return an <code>int</code> value
          */
-        public int compare(Object object1, Object object2)
+        public int compare(Logger logger1, Logger logger2)
         {
-            Logger logger1 = (Logger) object1;
-            Logger logger2 = (Logger) object2;
-
             if (!sortByLevel)
             {
                 return logger1.getName().compareTo(logger2.getName());
@@ -394,6 +393,7 @@ public class Log4jConfigurationServlet extends HttpServlet
          * @param object an <code>Object</code> value
          * @return a <code>boolean</code> value
          */
+        @Override
         public boolean equals(Object object)
         {
             if (!(object instanceof LoggerComparator))
@@ -406,6 +406,7 @@ public class Log4jConfigurationServlet extends HttpServlet
         /**
          * @see java.lang.Object#hashCode()
          */
+        @Override
         public int hashCode()
         {
             return super.hashCode();
@@ -413,8 +414,9 @@ public class Log4jConfigurationServlet extends HttpServlet
     }
 
     /**
-     * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
+     * {@inheritDoc}
      */
+    @Override
     public void init(ServletConfig config) throws ServletException
     {
         String fragmentParam = config.getInitParameter(CONFIG_FRAGMENT);

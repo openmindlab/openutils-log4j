@@ -129,6 +129,7 @@ public class EnhancedDailyRollingFileAppender extends FileAppender
         return datePattern;
     }
 
+    @Override
     public void activateOptions()
     {
         super.activateOptions();
@@ -302,6 +303,7 @@ public class EnhancedDailyRollingFileAppender extends FileAppender
      * Before actually logging, this method will check whether it is time to do a rollover. If it is, it will schedule
      * the next rollover time and then rollover.
      */
+    @Override
     protected void subAppend(LoggingEvent event)
     {
         long n = System.currentTimeMillis();
