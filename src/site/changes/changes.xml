@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+  "type" attribute can be: add, remove, update or fix.
+-->
+<document>
+  <properties>
+    <title>Changes</title>
+    <author email="fgiust(at)users.sourceforge.net">Fabrizio Giustina</author>
+  </properties>
+  <body>
+    <release version="2.0" date="2008-02-20" description="2.0.0">
+      <action type="add" dev="fgiust">
+        new it.openutils.log4j.AlternateSMTPAppender that aggregates similar log messages.
+      </action>
+      <action type="update" dev="fgiust">commons-lang dependency added</action>
+    </release>
+  </body>
+</document>
