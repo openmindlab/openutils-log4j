@@ -40,20 +40,24 @@ import org.apache.log4j.spi.ThrowableInformation;
  * </pre>
  *
  * @author Fabrizio Giustina
- * @version $Id$
+ * @version $Id: FilteredPatternLayout.java 8589 2008-02-10 18:01:57Z fgiust $
  */
 public class FilteredPatternLayout extends PatternLayout
 {
 
     /**
-     * Line separator for stacktrace frames.
-     */
-    private static String lineSeparator = "\n";
-
-    /**
      * Holds the list of filtered frames.
      */
     private Set<String> filteredFrames = new HashSet<String>();
+
+    private String header;
+
+    private String footer;
+
+    /**
+     * Line separator for stacktrace frames.
+     */
+    private static String lineSeparator = "\n";
 
     static
     {
@@ -68,7 +72,45 @@ public class FilteredPatternLayout extends PatternLayout
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the header.
+     * @return the header
+     */
+    @Override
+    public String getHeader()
+    {
+        return header;
+    }
+
+    /**
+     * Sets the header.
+     * @param header the header to set
+     */
+    public void setHeader(String header)
+    {
+        this.header = header;
+    }
+
+    /**
+     * Returns the footer.
+     * @return the footer
+     */
+    @Override
+    public String getFooter()
+    {
+        return footer;
+    }
+
+    /**
+     * Sets the footer.
+     * @param footer the footer to set
+     */
+    public void setFooter(String footer)
+    {
+        this.footer = footer;
+    }
+
+    /**
+     * @see org.apache.log4j.Layout#ignoresThrowable()
      */
     @Override
     public boolean ignoresThrowable()
@@ -77,7 +119,7 @@ public class FilteredPatternLayout extends PatternLayout
     }
 
     /**
-     * {@inheritDoc}
+     * @see org.apache.log4j.PatternLayout#format(org.apache.log4j.spi.LoggingEvent)
      */
     @Override
     public String format(LoggingEvent event)
@@ -142,4 +184,5 @@ public class FilteredPatternLayout extends PatternLayout
         }
         return false;
     }
+
 }

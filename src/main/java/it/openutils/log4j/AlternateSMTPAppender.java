@@ -36,7 +36,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Layout;
 import org.apache.log4j.Level;
@@ -65,21 +68,21 @@ import org.apache.log4j.spi.TriggeringEventEvaluator;
  *      &lt;param name="SMTPHost" value="localhost" />
  *      &lt;param name="Timeout" value="180" />
  *      &lt;param name="Subject" value="[EXAMPLE] %m" />
- *      &lt;layout class="org.apache.log4j.PatternLayout">
+ *      &lt;layout class="it.openutils.log4j.FilteredPatternLayout">
  *          &lt;param name="ConversionPattern" value="%-5p  %c %d{dd.MM.yyyy HH:mm:ss} -- %m%n" />
+ *          &lt;param name="Header"
+ *          value="
+ *        ===================================
+ *        Myapp (production environment)
+ *        Date: %d{dd.MM.yyyy HH:mm:ss}
+ *        ===================================
+ *          " />
  *      &lt;/layout>
- *      &lt;param name="Header"
- *      value="
- *    ===================================
- *    Myapp (production environment)
- *    Date: %d{dd.MM.yyyy HH:mm:ss}
- *    ===================================
- *      " />
  *  &lt;/appender>
  * </pre>
  *
  * @author Fabrizio Giustina
- * @version $Id$
+ * @version $Id: $
  */
 public class AlternateSMTPAppender extends AppenderSkeleton
 {
@@ -94,7 +97,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
 
     private boolean locationInfo;
 
-    private Timer timer = new Timer();
+    private Timer timer = new Timer("log4j mail appender", true);
 
     private TimerTask timerTask;
 
@@ -137,6 +140,10 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     public AlternateSMTPAppender()
     {
         this(new DefaultEvaluator());
+
+        // force loading this class
+        MimeBodyPart.class.getName();
+        MimeUtility.class.getName();
     }
 
     /**
@@ -337,12 +344,11 @@ public class AlternateSMTPAppender extends AppenderSkeleton
                 String t = layout.getHeader();
                 if (t != null)
                 {
+                    t = StringUtils.replace(t, "%o", Integer.toString(lea.getCount()));
+                    t = StringUtils.replace(t, "%n", Layout.LINE_SEP);
                     sbuf.append(t);
+                    sbuf.append("\n");
                 }
-
-                sbuf.append("\nNumber of occurences: ");
-                sbuf.append(lea.getCount());
-                sbuf.append("\n\n");
 
                 LoggingEvent event = lea.getLoggingEvent();
 
@@ -377,6 +383,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
                 t = layout.getFooter();
                 if (t != null)
                 {
+                    t = StringUtils.replace(t, "%n", Layout.LINE_SEP);
                     sbuf.append(t);
                 }
                 part.setContent(sbuf.toString(), layout.getContentType());
@@ -631,6 +638,12 @@ class LoggingEventAggregator
         Object otherLem = other.loggingEvent.getMessage();
         String[] otherThstr = other.loggingEvent.getThrowableStrRep();
 
+        int length = Math.min(otherThstr.length, thstr.length);
+        length = Math.min(10, length);
+
+        otherThstr = (String[]) ArrayUtils.subarray(otherThstr, 0, length);
+        String[] thisThstr = (String[]) ArrayUtils.subarray(thstr, 0, length);
+
         if (lem == null)
         {
             if (otherLem != null)
@@ -643,7 +656,7 @@ class LoggingEventAggregator
         {
             return false;
         }
-        if (!Arrays.equals(thstr, otherThstr))
+        if (!Arrays.equals(thisThstr, otherThstr))
         {
             return false;
         }
