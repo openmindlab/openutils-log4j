@@ -82,26 +82,10 @@ import org.apache.log4j.spi.TriggeringEventEvaluator;
  * </pre>
  * 
  * @author Fabrizio Giustina
- * @version $Id: $
+ * @version $Id$
  */
 public class AlternateSMTPAppender extends AppenderSkeleton
 {
-
-    private String to;
-
-    private String from;
-
-    private Layout subjectLayout;
-
-    private String smtpHost;
-
-    private boolean locationInfo;
-
-    private Timer timer = new Timer("log4j mail appender", true);
-
-    private TimerTask timerTask;
-
-    private int timeout;
 
     protected Map<LoggingEventAggregator, LoggingEventAggregator> events = new LinkedHashMap<LoggingEventAggregator, LoggingEventAggregator>()
     {
@@ -132,6 +116,22 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     protected Message msg;
 
     protected TriggeringEventEvaluator evaluator;
+
+    private String to;
+
+    private String from;
+
+    private Layout subjectLayout;
+
+    private String smtpHost;
+
+    private boolean locationInfo;
+
+    private Timer timer = new Timer("log4j mail appender", true);
+
+    private TimerTask timerTask;
+
+    private int timeout;
 
     /**
      * The default constructor will instantiate the appender with a {@link TriggeringEventEvaluator} that will trigger
