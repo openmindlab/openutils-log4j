@@ -8,9 +8,13 @@
     <author email="fgiust(at)users.sourceforge.net">Fabrizio Giustina</author>
   </properties>
   <body>
+    <release version="2.0.1" date="2008-03-11" description="2.0.1">
+      <action type="add" dev="fgiust"> Make it.openutils.log4j.AlternateSMTPAppender working properly also when no timeout
+        is set (withot message aggregation).</action>
+      <action type="update" dev="fgiust">commons-lang dependency added</action>
+    </release>
     <release version="2.0" date="2008-02-20" description="2.0.0">
-      <action type="add" dev="fgiust">
-        new it.openutils.log4j.AlternateSMTPAppender that aggregates similar log messages.
+      <action type="add" dev="fgiust"> new it.openutils.log4j.AlternateSMTPAppender that aggregates similar log messages.
       </action>
       <action type="update" dev="fgiust">commons-lang dependency added</action>
     </release>

@@ -59,7 +59,7 @@ import org.apache.log4j.spi.TriggeringEventEvaluator;
  * <li>it will send a mail for every single message (bufferSize is not supported), but it will aggregate any identical
  * log event received during the timeout. Identical events are log with same message and same stack trace</li>
  * </ul>
- *
+ * 
  * <pre>
  *  &lt;appender name="mail" class="it.openutils.log4j.AlternateSMTPAppender">
  *      &lt;param name="Threshold" value="ERROR" />
@@ -80,7 +80,7 @@ import org.apache.log4j.spi.TriggeringEventEvaluator;
  *      &lt;/layout>
  *  &lt;/appender>
  * </pre>
- *
+ * 
  * @author Fabrizio Giustina
  * @version $Id: $
  */
@@ -211,39 +211,48 @@ public class AlternateSMTPAppender extends AppenderSkeleton
 
         LoggingEventAggregator leg = new LoggingEventAggregator(event);
 
-        events.put(leg, leg);
-
         if (evaluator.isTriggeringEvent(event))
         {
             if (timeout == 0)
             {
                 // send immediately
-                sendBuffer(events.values());
+                synchronized (events)
+                {
+                    Collection<LoggingEventAggregator> le = new ArrayList<LoggingEventAggregator>();
+                    le.add(leg);
+                    sendBuffer(le);
+                }
                 return;
             }
-            if (timerTask == null)
+            else
             {
+                events.put(leg, leg);
 
-                timerTask = new TimerTask()
+                if (timerTask == null)
+
                 {
 
-                    @Override
-                    public void run()
+                    timerTask = new TimerTask()
                     {
-                        Collection<LoggingEventAggregator> le;
-                        synchronized (events)
+
+                        @Override
+                        public void run()
                         {
-                            le = new ArrayList<LoggingEventAggregator>(events.values());
-                            events.clear();
-                            timerTask = null;
+                            Collection<LoggingEventAggregator> le;
+                            synchronized (events)
+                            {
+                                le = new ArrayList<LoggingEventAggregator>(events.values());
+                                events.clear();
+                                timerTask = null;
+                            }
+
+                            sendBuffer(le);
                         }
+                    };
 
-                        sendBuffer(le);
-                    }
-                };
+                    this.timer.schedule(this.timerTask, this.timeout * 1000L);
 
-                this.timer.schedule(this.timerTask, this.timeout * 1000L);
-
+                }
             }
         }
     }
