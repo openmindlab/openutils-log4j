@@ -9,7 +9,7 @@
   </parent>
   <artifactId>openutils-log4j</artifactId>
   <packaging>jar</packaging>
-  <version>2.0.2-SNAPSHOT</version>
+  <version>2.0.2</version>
   <name>openutils for Log4j</name>
   <description>openutils log4j extensions</description>
   <build>
@@ -54,4 +54,10 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <scm>
+    <connection>scm:svn:https://openutils.svn.sourceforge.net/svnroot/openutils/tags/openutils-log4j-2.0.2</connection>
+    <developerConnection>scm:svn:https://openutils.svn.sourceforge.net/svnroot/openutils/tags/openutils-log4j-2.0.2</developerConnection>
+    <url>http://openutils.svn.sourceforge.net/viewcvs.cgi/openutils/tags/openutils-log4j-2.0.2</url>
+  </scm>
 </project>
