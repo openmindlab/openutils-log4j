@@ -8,8 +8,12 @@
     <author email="fgiust(at)users.sourceforge.net">Fabrizio Giustina</author>
   </properties>
   <body>
+    <release version="2.0.2" date="2008-03-19" description="2.0.2">
+      <action type="fix" dev="fgiust"> Fixed a NPE in AlternateSMTPAppender (for exceptions with a null stacktrace)
+      </action>
+    </release>
     <release version="2.0.1" date="2008-03-11" description="2.0.1">
-      <action type="add" dev="fgiust"> Make it.openutils.log4j.AlternateSMTPAppender working properly also when no timeout
+      <action type="fix" dev="fgiust"> Make it.openutils.log4j.AlternateSMTPAppender working properly also when no timeout
         is set (withot message aggregation).</action>
       <action type="update" dev="fgiust">commons-lang dependency added</action>
     </release>

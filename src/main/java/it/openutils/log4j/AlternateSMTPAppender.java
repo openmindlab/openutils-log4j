@@ -39,6 +39,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Layout;
@@ -642,10 +643,12 @@ class LoggingEventAggregator
         final LoggingEventAggregator other = (LoggingEventAggregator) obj;
 
         Object lem = loggingEvent.getMessage();
-        String[] thstr = loggingEvent.getThrowableStrRep();
+        String[] thstr = (String[]) ObjectUtils.defaultIfNull(loggingEvent.getThrowableStrRep(), new String[0]);
 
         Object otherLem = other.loggingEvent.getMessage();
-        String[] otherThstr = other.loggingEvent.getThrowableStrRep();
+        String[] otherThstr = (String[]) ObjectUtils.defaultIfNull(
+            other.loggingEvent.getThrowableStrRep(),
+            new String[0]);
 
         int length = Math.min(otherThstr.length, thstr.length);
         length = Math.min(10, length);
