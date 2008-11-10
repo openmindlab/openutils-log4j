@@ -36,7 +36,7 @@ import org.apache.log4j.spi.LoggingEvent;
  * <code>archive</code> <strong>Note that since DailyRollingFileAppender is not easily extendible, this class is
  * actually a copy and paste of all the code with slights modifications...</strong>
  * @author fgiust
- * @version $Id: $
+ * @version $Id$
  */
 public class EnhancedDailyRollingFileAppender extends FileAppender
 {
