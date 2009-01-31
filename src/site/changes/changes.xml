@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!--
+  <!--
   "type" attribute can be: add, remove, update or fix.
 -->
 <document>
@@ -8,6 +8,10 @@
     <author email="fgiust(at)users.sourceforge.net">Fabrizio Giustina</author>
   </properties>
   <body>
+    <release version="2.0.3" date="2009-01-31" description="2.0.3">
+      <action type="update" dev="fgiust"> Updated log4j dependency to 1.2.15 with the necessary exclusion (1.2.15 brings
+        in several optional/unwanted dependencies with maven)</action>
+    </release>
     <release version="2.0.2" date="2008-03-19" description="2.0.2">
       <action type="fix" dev="fgiust"> Fixed a NPE in AlternateSMTPAppender (for exceptions with a null stacktrace)
       </action>
