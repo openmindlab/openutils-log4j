@@ -81,7 +81,6 @@ import org.apache.log4j.spi.TriggeringEventEvaluator;
  *      &lt;/layout>
  *  &lt;/appender>
  * </pre>
- * 
  * @author Fabrizio Giustina
  * @version $Id$
  */
@@ -286,7 +285,6 @@ public class AlternateSMTPAppender extends AppenderSkeleton
         return true;
     }
 
-    @Override
     public synchronized void close()
     {
         this.closed = true;
@@ -329,7 +327,6 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     /**
      * The <code>SMTPAppender</code> requires a {@link org.apache.log4j.Layout layout}.
      */
-    @Override
     public boolean requiresLayout()
     {
         return true;
