@@ -8,6 +8,11 @@
     <author email="fgiust(at)users.sourceforge.net">Fabrizio Giustina</author>
   </properties>
   <body>
+    <release version="2.0.4" date="2009-02-21" description="2.0.4">
+      <action type="add" dev="fgiust">Added support for using MDC in AlternateSMTPAppender</action>
+      <action type="add" dev="fgiust">AlternateSMTPAppender now handles the layour header as a
+        PatternLayout and not as a static String anymore.</action>
+    </release>
     <release version="2.0.3" date="2009-01-31" description="2.0.3">
       <action type="update" dev="fgiust"> Updated log4j dependency to 1.2.15 with the necessary exclusion (1.2.15 brings
         in several optional/unwanted dependencies with maven)</action>

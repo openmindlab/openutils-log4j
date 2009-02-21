@@ -73,10 +73,12 @@ import org.apache.log4j.spi.TriggeringEventEvaluator;
  *          &lt;param name="ConversionPattern" value="%-5p  %c %d{dd.MM.yyyy HH:mm:ss} -- %m%n" />
  *          &lt;param name="Header"
  *          value="
- *        ===================================
- *        Myapp (production environment)
- *        Date: %d{dd.MM.yyyy HH:mm:ss}
- *        ===================================
+ *        ===================================%n
+ *        Myapp (production environment)%n
+ *        Date: %d{dd.MM.yyyy HH:mm:ss}%n
+ *        Url: %X{url}%n
+ *        Number of occurrences: %o%n
+ *        ===================================%n
  *          " />
  *      &lt;/layout>
  *  &lt;/appender>
@@ -122,6 +124,8 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     private String from;
 
     private Layout subjectLayout;
+
+    private Layout headerLayout;
 
     private String smtpHost;
 
@@ -204,6 +208,8 @@ public class AlternateSMTPAppender extends AppenderSkeleton
 
         event.getThreadName();
         event.getNDC();
+        event.getMDCCopy();
+
         if (locationInfo)
         {
             event.getLocationInformation();
@@ -348,16 +354,25 @@ public class AlternateSMTPAppender extends AppenderSkeleton
                 MimeBodyPart part = new MimeBodyPart();
 
                 StringBuffer sbuf = new StringBuffer();
-                String t = layout.getHeader();
-                if (t != null)
-                {
-                    t = StringUtils.replace(t, "%o", Integer.toString(lea.getCount()));
-                    t = StringUtils.replace(t, "%n", Layout.LINE_SEP);
-                    sbuf.append(t);
-                    sbuf.append("\n");
-                }
 
                 LoggingEvent event = lea.getLoggingEvent();
+
+                if (layout.getHeader() != null)
+                {
+                    if (headerLayout == null)
+                    {
+                        String header = layout.getHeader();
+                        header = StringUtils.replace(header, "%o", "{number_of_occurrences}");
+                        headerLayout = new PatternLayout(header);
+                    }
+                    String t = headerLayout.format(event);
+                    if (t != null)
+                    {
+                        t = StringUtils.replace(t, "{number_of_occurrences}", Integer.toString(lea.getCount()));
+                        sbuf.append(t);
+                        sbuf.append("\n");
+                    }
+                }
 
                 if (this.subjectLayout != null)
                 {
@@ -387,7 +402,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
                         }
                     }
                 }
-                t = layout.getFooter();
+                String t = layout.getFooter();
                 if (t != null)
                 {
                     t = StringUtils.replace(t, "%n", Layout.LINE_SEP);
@@ -462,8 +477,8 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * The <b>SMTPHost</b> option takes a string value which should be a the host name of the SMTP server that will
-     * send the e-mail message.
+     * The <b>SMTPHost</b> option takes a string value which should be a the host name of the SMTP server that will send
+     * the e-mail message.
      */
     public void setSMTPHost(String smtpHost)
     {
@@ -496,9 +511,9 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * The <b>EvaluatorClass</b> option takes a string value representing the name of the class implementing the {@link
-     * TriggeringEventEvaluator} interface. A corresponding object will be instantiated and assigned as the triggering
-     * event evaluator for the SMTPAppender.
+     * The <b>EvaluatorClass</b> option takes a string value representing the name of the class implementing the
+     * {@link TriggeringEventEvaluator} interface. A corresponding object will be instantiated and assigned as the
+     * triggering event evaluator for the SMTPAppender.
      */
     public void setEvaluatorClass(String value)
     {
@@ -517,10 +532,9 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * The <b>LocationInfo</b> option takes a boolean value. By default, it is set to false which means there will be
-     * no effort to extract the location information related to the event. As a result, the layout that formats the
-     * events as they are sent out in an e-mail is likely to place the wrong location information (if present in the
-     * format).
+     * The <b>LocationInfo</b> option takes a boolean value. By default, it is set to false which means there will be no
+     * effort to extract the location information related to the event. As a result, the layout that formats the events
+     * as they are sent out in an e-mail is likely to place the wrong location information (if present in the format).
      * <p>
      * Location information extraction is comparatively very slow and should be avoided unless performance is not a
      * concern.
