@@ -4,7 +4,7 @@
   <parent>
     <groupId>net.sourceforge.openutils</groupId>
     <artifactId>openutils</artifactId>
-    <version>10</version>
+    <version>11</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>openutils-log4j</artifactId>
