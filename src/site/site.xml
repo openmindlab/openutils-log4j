@@ -16,10 +16,6 @@
     <head>
       <link rel="icon" href="images/favicon.ico" />
     </head>
-    <breadcrumbs>
-      <item name="openutils" href="http://openutils.sourceforge.net/" />
-      <item name="openutils-log4j" href="http://openutils.sourceforge.net/openutils-log4j" />
-    </breadcrumbs>
     <menu name="openutils-log4j">
       <item name="Usage" href="index.html">
         <item name="smtp appender" href="smtpappender.html" />
