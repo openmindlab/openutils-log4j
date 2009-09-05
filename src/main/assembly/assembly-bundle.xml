@@ -1,0 +1,33 @@
+<assembly>
+  <id>bundle</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <fileSets>
+    <fileSet>
+      <filtered>true</filtered>
+      <outputDirectory>/</outputDirectory>
+      <lineEnding>crlf</lineEnding>
+      <directory>${basedir}/src/main/bundle</directory>
+      <includes>
+        <include>*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>src/main/java/</directory>
+      <outputDirectory>/sources/</outputDirectory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>bin</outputDirectory>
+      <includes>
+        <include>net.sourceforge.openutils:*</include>
+      </includes>
+    </dependencySet>
+  </dependencySets>
+</assembly>

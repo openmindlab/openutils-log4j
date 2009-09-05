@@ -1,4 +1,7 @@
 * text=auto !eol
+src/main/assembly/assembly-bundle.xml svneol=native#text/plain
+src/main/bundle/LICENSE.txt svneol=native#text/plain
+src/main/bundle/README.txt svneol=native#text/plain
 src/main/java/it/openutils/log4j/AlternateSMTPAppender.java svneol=native#text/plain
 src/main/java/it/openutils/log4j/EnhancedDailyRollingFileAppender.java svneol=native#text/plain
 src/site/apt/fileppenders.apt svneol=native#text/plain

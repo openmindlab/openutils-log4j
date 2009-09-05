@@ -11,7 +11,18 @@
   <packaging>jar</packaging>
   <version>2.0.5-SNAPSHOT</version>
   <name>openutils for Log4j</name>
-  <description>openutils log4j extensions</description>
+  <description>Openutils log4j extensions</description>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <url>http://lab.openmindonline.it/lab/products/openutilslog4j.html</url>
+  <issueManagement>
+    <system>jira</system>
+    <url>http://lab.openmindonline.it/jira/browse/LOG</url>
+  </issueManagement>
   <build>
     <plugins>
       <plugin>
@@ -20,6 +31,23 @@
         <configuration>
           <source>1.5</source>
           <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>bundle</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptors>
+            <descriptor>${basedir}/src/main/assembly/assembly-bundle.xml</descriptor>
+          </descriptors>
         </configuration>
       </plugin>
     </plugins>
