@@ -17,10 +17,10 @@
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
-  <url>http://lab.openmindonline.it/lab/products/openutilslog4j.html</url>
+  <url>http://www.openmindlab.com/lab/products/openutilslog4j.html</url>
   <issueManagement>
     <system>jira</system>
-    <url>http://lab.openmindonline.it/jira/browse/LOG</url>
+    <url>http://jira.openmindlab.com/browse/LOG</url>
   </issueManagement>
   <build>
     <plugins>

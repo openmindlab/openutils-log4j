@@ -3,4 +3,6 @@
 /.project
 /.settings
 /.wtpmodules
+/pom.xml.releaseBackup
+/release.properties
 /target
