@@ -4,8 +4,8 @@
   <version position="navigation-bottom" />
   <bannerRight>
     <name>Openutils</name>
-    <src>http://openutils.sourceforge.net/images/openutils-logo.png</src>
-    <href>http://openutils.sourceforge.net</href>
+    <src>http://www.openmindlab.com/images/openutils-logo.png</src>
+    <href>http://www.openmindlab.com</href>
   </bannerRight>
   <bannerLeft>
     <name>Sourceforge</name>
@@ -29,6 +29,6 @@
   <skin>
     <groupId>net.sourceforge.openutils</groupId>
     <artifactId>openutils-maven-skin</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
   </skin>
 </project>
