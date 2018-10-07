@@ -15,8 +15,8 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>src/main/java/</directory>
-      <outputDirectory>/sources/</outputDirectory>
+      <directory>${basedir}/src/main/java/</directory>
+      <outputDirectory>${basedir}/sources/</outputDirectory>
       <includes>
         <include>**/*</include>
       </includes>

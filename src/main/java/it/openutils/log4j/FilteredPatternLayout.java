@@ -1,7 +1,7 @@
 /**
  *
- * openutils for Log4j (http://www.openmindlab.com/lab/products/openutilslog4j.html)
- * Copyright(C) ${project.inceptionYear}-2012, Openmind S.r.l. http://www.openmindonline.it
+ * openutils for Log4j (https://github.com/openmindlab/openutils-log4j)
+ * Copyright(C) 2005-2018, Openmind S.r.l. http://www.openmindonline.it
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
 package it.openutils.log4j;
 
 import java.util.HashSet;
