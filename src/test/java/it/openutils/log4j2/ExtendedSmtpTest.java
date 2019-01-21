@@ -20,6 +20,7 @@ package it.openutils.log4j2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.mail.BodyPart;
@@ -30,24 +31,31 @@ import org.apache.logging.log4j.CloseableThreadContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.jvnet.mock_javamail.Mailbox;
 
 /**
  * @author fgiust
  */
-public class ThreadContextTest {
+public class ExtendedSmtpTest {
 
-	private static Logger log = LogManager.getLogger(ThreadContextTest.class);
-
+	private static Logger log = null;
+	
+	@BeforeClass
+    public static void setLogger(){
+		System.setProperty("log4j.configurationFile", "log4j2.xml");
+        log = LogManager.getLogger(ExtendedSmtpTest.class);
+    }
+	
 	@Before
-	public void setUp() {
+	public void setUp() throws URISyntaxException {
 		// clear Mock JavaMail box
 		Mailbox.clearAll();
 	}
 
 	@Test
-	public void testFilter() throws Exception {
+	public void testThrowable() throws Exception {
 
 		System.setProperty("systemproperty", "***system***");
 		final String MDC1_VALUE = "***testmdc***";

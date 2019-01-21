@@ -1,7 +1,7 @@
 /**
  *
- * openutils for Log4j (https://github.com/openmindlab/openutils-log4j)
- * Copyright(C) 2005-2018, Openmind S.r.l. http://www.openmindonline.it
+ * openutils for Log4j (http://www.openmindlab.com/lab/products/openutilslog4j.html)
+ * Copyright(C) ${project.inceptionYear}-2012, Openmind S.r.l. http://www.openmindonline.it
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,18 +14,23 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *  
+ *  NOTE: this class cannot be run because of problems setting up different classpaths for testing!
  */
+
 package it.openutils.log4j;
 
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 
 
 /**
  * @author fgiust
  * @version $Revision$ ($Author$)
  */
+@Ignore("Ignored due managed different classpath for one maven test classpath! Here for historical purpose.")
 public class FilteredPatternLayoutTest extends TestCase
 {
 
