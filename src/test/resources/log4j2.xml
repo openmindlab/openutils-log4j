@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" shutdownHook="disable" packages="it.openutils.log4j2">
+  <Appenders>
+    <Console name="CONSOLE" target="SYSTEM_OUT">
+      <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
+      <PatternLayout pattern="%d{HH:mm:ss} %-5p [MDC1=%X{MDC1}] %C %M (%F:%L) %m %ex%n" />
+    </Console>
+  <SMTPx name="sync-mail"
+    to="none@example.com"
+    from="TEST ${systemproperty}&lt;none@example.com&gt;"
+    smtpHost="localhost"
+    subject="[TEST ${sys:systemproperty}] %X{MDC1} %m%n%ex"
+    smtpPort="25" 
+    smtpDebug="true" 
+    ignoreExceptions="false">
+    <ThresholdFilter level="ERROR"/>
+    <PatternLayout 
+      pattern="%-5p  %c (%F:%L) %d{dd.MM.yyyy HH:mm:ss} %m%n MDC1=%X{MDC1} %rEx{full,filters(org.eclipse.jdt,org.junit.internal.runners,org.apache.maven)}"
+      alwaysWriteExceptions="true"
+      header="%n
+===================================%n
+MDC1=%X{MDC1}%n
+===================================%n" footer="%n===================================%n"/>
+  </SMTPx>
+    <Async name="MAIL" includeLocation="true">
+      <AppenderRef ref="sync-mail" />
+    </Async>
+  </Appenders>
+  <Loggers>
+    <Logger name="de" level="INFO" />
+    <Logger name="org" level="INFO" />
+    <Logger name="com" level="INFO" />
+    <Logger name="it" level="INFO" />
+    <Logger name="net" level="INFO" />
+    <Logger name="info" level="INFO" />
+    <Root level="INFO">
+      <AppenderRef ref="CONSOLE" />
+      <AppenderRef ref="sync-mail" />
+    </Root>
+  </Loggers>
+</Configuration>
