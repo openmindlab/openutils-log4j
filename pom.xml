@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd ">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd ">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sourceforge.openutils</groupId>
 	<artifactId>openutils-log4j</artifactId>
@@ -20,6 +22,28 @@
 		<url>https://github.com/openmindlab/openutils-log4j</url>
 		<tag>HEAD</tag>
 	</scm>
+	<developers>
+		<developer>
+			<id>fgiust</id>
+			<name>Fabrizio Giustina</name>
+			<email>fgiust@apache.org</email>
+			<organization>openmind</organization>
+			<roles>
+				<role>Project admin and developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>vincenzo.cerbone</id>
+			<name>Vincenzo Cerbone</name>
+			<email>vincenzo.cerbone@openmindonline.it</email>
+			<organization>openmind</organization>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
 	<build>
 		<plugins>
 			<plugin>
@@ -128,7 +152,7 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		 <dependency>
+		<dependency>
 			<groupId>org.jvnet.mock-javamail</groupId>
 			<artifactId>mock-javamail</artifactId>
 			<version>1.9</version>
