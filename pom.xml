@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd ">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd ">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sourceforge.openutils</groupId>
 	<artifactId>openutils-log4j</artifactId>
@@ -44,6 +46,14 @@
 	</developers>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<doclint>none</doclint>
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
@@ -163,6 +173,16 @@
 		</dependency>
 	</dependencies>
 	<profiles>
+    <profile>
+        <id>disable-java8-doclint</id>
+        <activation>
+            <jdk>[1.8,)</jdk>
+        </activation>
+        <properties>
+            <!-- set property if >= java 8 -->
+            <disableDoclint>-Xdoclint:none</disableDoclint>
+        </properties>
+    </profile>
 		<profile>
 			<id>release-sign-artifacts</id>
 			<activation>
@@ -171,6 +191,9 @@
 					<value>true</value>
 				</property>
 			</activation>
+			<properties>
+				<maven.javadoc.skip>false</maven.javadoc.skip>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -203,6 +226,5 @@
 	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.javadoc.skip>true</maven.javadoc.skip>
 	</properties>
 </project>

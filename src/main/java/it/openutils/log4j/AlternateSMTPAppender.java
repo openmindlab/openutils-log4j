@@ -63,15 +63,15 @@ import org.apache.log4j.spi.TriggeringEventEvaluator;
  * </ul>
  * 
  * <pre>
- *  &lt;appender name="mail" class="it.openutils.log4j.AlternateSMTPAppender">
- *      &lt;param name="Threshold" value="ERROR" />
- *      &lt;param name="To" value="logs@example.com" />
- *      &lt;param name="From" value="info@example.com" />
- *      &lt;param name="SMTPHost" value="localhost" />
- *      &lt;param name="Timeout" value="180" />
- *      &lt;param name="Subject" value="[EXAMPLE] %m" />
- *      &lt;layout class="it.openutils.log4j.FilteredPatternLayout">
- *          &lt;param name="ConversionPattern" value="%-5p  %c %d{dd.MM.yyyy HH:mm:ss} -- %m%n" />
+ *  &lt;appender name="mail" class="it.openutils.log4j.AlternateSMTPAppender"&lgt;
+ *      &lt;param name="Threshold" value="ERROR" /&lgt;
+ *      &lt;param name="To" value="logs@example.com" /&lgt;
+ *      &lt;param name="From" value="info@example.com" /&lgt;
+ *      &lt;param name="SMTPHost" value="localhost" /&lgt;
+ *      &lt;param name="Timeout" value="180" /&lgt;
+ *      &lt;param name="Subject" value="[EXAMPLE] %m" /&lgt;
+ *      &lt;layout class="it.openutils.log4j.FilteredPatternLayout"&lgt;
+ *          &lt;param name="ConversionPattern" value="%-5p  %c %d{dd.MM.yyyy HH:mm:ss} -- %m%n" /&lgt;
  *          &lt;param name="Header"
  *          value="
  *        ===================================%n
@@ -80,9 +80,9 @@ import org.apache.log4j.spi.TriggeringEventEvaluator;
  *        Url: %X{url}%n
  *        Number of occurrences: %o%n
  *        ===================================%n
- *          " />
- *      &lt;/layout>
- *  &lt;/appender>
+ *          " /&lgt;
+ *      &lt;/layout&lgt;
+ *  &lt;/appender&lgt;
  * </pre>
  * @author Fabrizio Giustina
  * @version $Id$
@@ -197,6 +197,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     /**
      * Perform SMTPAppender specific appending actions, mainly adding the event to a cyclic buffer and checking if the
      * event triggers an e-mail to be sent.
+     * @param event to be logged
      */
     @Override
     public void append(LoggingEvent event)
@@ -267,8 +268,9 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     /**
      * This method determines if there is a sense in attempting to append.
      * <p>
-     * It checks whether there is a set output target and also if there is a set layout. If these checks fail, then the
-     * boolean value <code>false</code> is returned.
+     * It checks whether there is a set output target and also if there is a set layout.
+     * @return  If these checks fail, then the boolean value <code>false</code> is returned.
+     * 
      */
     protected boolean checkEntryConditions()
     {
@@ -324,7 +326,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns value of the <b>To</b> option.
+     * @return value of the <b>To</b> option.
      */
     public String getTo()
     {
@@ -333,6 +335,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
 
     /**
      * The <code>SMTPAppender</code> requires a {@link org.apache.log4j.Layout layout}.
+     * @return if requires layout
      */
     public boolean requiresLayout()
     {
@@ -341,6 +344,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
 
     /**
      * Send the contents of the cyclic buffer as an e-mail message.
+     * @param eventsCollection to be sent
      */
     protected void sendBuffer(Collection<LoggingEventAggregator> eventsCollection)
     {
@@ -428,7 +432,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns value of the <b>EvaluatorClass</b> option.
+     * @return value of the <b>EvaluatorClass</b> option.
      */
     public String getEvaluatorClass()
     {
@@ -436,7 +440,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns value of the <b>From</b> option.
+     * @return value of the <b>From</b> option.
      */
     public String getFrom()
     {
@@ -444,7 +448,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns value of the <b>Subject</b> option.
+     * @return value of the <b>Subject</b> option.
      */
     public String getSubject()
     {
@@ -452,7 +456,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * The <b>From</b> option takes a string value which should be a e-mail address of the sender.
+     * @param from option takes a string value which should be a e-mail address of the sender.
      */
     public void setFrom(String from)
     {
@@ -460,7 +464,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * The <b>Subject</b> option takes a string value which should be a the subject of the e-mail message.
+     * @param subjectPattern option takes a string value which should be a the subject of the e-mail message.
      */
     public void setSubject(String subjectPattern)
     {
@@ -469,6 +473,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
 
     /**
      * This option is ignored!
+     * @param bufferSize this param will be ignored
      */
     @Deprecated
     public void setBufferSize(int bufferSize)
@@ -478,7 +483,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * The <b>SMTPHost</b> option takes a string value which should be a the host name of the SMTP server that will send
+     * @param smtpHost option takes a string value which should be a the host name of the SMTP server that will send
      * the e-mail message.
      */
     public void setSMTPHost(String smtpHost)
@@ -487,7 +492,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns value of the <b>SMTPHost</b> option.
+     * @return value of the <b>SMTPHost</b> option.
      */
     public String getSMTPHost()
     {
@@ -495,7 +500,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * The <b>To</b> option takes a string value which should be a comma separated list of e-mail address of the
+     * @param to option takes a string value which should be a comma separated list of e-mail address of the
      * recipients.
      */
     public void setTo(String to)
@@ -504,7 +509,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns value of the <b>BufferSize</b> option.
+     * @return value of the <b>BufferSize</b> option.
      */
     public int getBufferSize()
     {
@@ -512,7 +517,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * The <b>EvaluatorClass</b> option takes a string value representing the name of the class implementing the
+     * @param value as <b>EvaluatorClass</b> option takes a string value representing the name of the class implementing the
      * {@link TriggeringEventEvaluator} interface. A corresponding object will be instantiated and assigned as the
      * triggering event evaluator for the SMTPAppender.
      */
@@ -525,7 +530,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * @param value
+     * @param value as <b>TriggeringEventEvaluator</b>
      */
     public void setEvaluator(TriggeringEventEvaluator value)
     {
@@ -533,7 +538,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * The <b>LocationInfo</b> option takes a boolean value. By default, it is set to false which means there will be no
+     * @param locationInfo option takes a boolean value. By default, it is set to false which means there will be no
      * effort to extract the location information related to the event. As a result, the layout that formats the events
      * as they are sent out in an e-mail is likely to place the wrong location information (if present in the format).
      * <p>
@@ -546,7 +551,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns value of the <b>LocationInfo</b> option.
+     * @return value of the <b>LocationInfo</b> option.
      */
     public boolean getLocationInfo()
     {
@@ -596,7 +601,6 @@ class LoggingEventAggregator
     }
 
     /**
-     * Returns the count.
      * @return the count
      */
     public int getCount()
@@ -605,7 +609,6 @@ class LoggingEventAggregator
     }
 
     /**
-     * Sets the count.
      * @param count the count to set
      */
     public void setCount(int count)

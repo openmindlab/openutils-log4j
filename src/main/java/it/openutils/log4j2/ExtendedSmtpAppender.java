@@ -45,9 +45,9 @@ import org.apache.logging.log4j.core.layout.HtmlLayout;
  *
  * This class is nearly copy&paste of original code because SmtpAppender is final (why?).
  *
- * @see #createAppender(String, String, String, String, String, String, String, boolean, String, String, int, String,
+ * have a look to createAppender(String, String, String, String, String, String, String, boolean, String, String, int, String,
  *      String, boolean, int, Layout, Filter, boolean, int, char, boolean, int, boolean, boolean, boolean, boolean)
- * @see ExtendedSmtpManager
+ *ExtendedSmtpManager
  *
  * @author Thies Wellpott
  */
@@ -82,15 +82,11 @@ public class ExtendedSmtpAppender extends AbstractAppender
      * @param replyTo
      *            The comma-separated list of reply-to email addresses.
      * @param subject
-     *            The subject as plain text or as pattern for PatternLayout (see subjectWithLayout). Required.
-     * @param subjectWithLayout
-     *            If true, the subject is used as pattern for PatternLayout; default is false.
+     *            The subject as plain text or as pattern for PatternLayout
      * @param smtpProtocol
      *            The SMTP transport protocol (such as "smtps", defaults to "smtp").
      * @param smtpHost
      *            The SMTP hostname to send to. Required.
-     * @param smtpPortStr
-     *            The SMTP port to send to.
      * @param smtpUsername
      *            The username required to authenticate against the SMTP server.
      * @param smtpPassword
