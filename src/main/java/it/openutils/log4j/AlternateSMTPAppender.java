@@ -226,7 +226,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
                 // send immediately
                 synchronized (events)
                 {
-                    Collection<LoggingEventAggregator> le = new ArrayList<LoggingEventAggregator>();
+                    Collection<LoggingEventAggregator> le = new ArrayList<>();
                     le.add(leg);
                     sendBuffer(le);
                 }
@@ -249,7 +249,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
                             Collection<LoggingEventAggregator> le;
                             synchronized (events)
                             {
-                                le = new ArrayList<LoggingEventAggregator>(events.values());
+                                le = new ArrayList<>(events.values());
                                 events.clear();
                                 timerTask = null;
                             }

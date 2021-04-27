@@ -50,7 +50,7 @@ public class FilteredPatternLayout extends PatternLayout
     /**
      * Holds the list of filtered frames.
      */
-    private Set<String> filteredFrames = new HashSet<String>();
+    private Set<String> filteredFrames = new HashSet<>();
 
     private String header;
 

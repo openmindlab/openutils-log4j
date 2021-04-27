@@ -292,7 +292,7 @@ public class Log4jConfigurationServlet extends HttpServlet
     {
         Enumeration<Logger> enm = LogManager.getCurrentLoggers();
 
-        List<Logger> list = new ArrayList<Logger>();
+        List<Logger> list = new ArrayList<>();
 
         // Add all current loggers to the list
         while (enm.hasMoreElements())
