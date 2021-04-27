@@ -230,7 +230,6 @@ public class AlternateSMTPAppender extends AppenderSkeleton
                     le.add(leg);
                     sendBuffer(le);
                 }
-                return;
             }
             else
             {
