@@ -50,7 +50,7 @@ public class FilteredPatternLayout extends PatternLayout
     /**
      * Holds the list of filtered frames.
      */
-    private Set<String> filteredFrames = new HashSet<String>();
+    private Set<String> filteredFrames = new HashSet<>();
 
     private String header;
 
@@ -149,7 +149,7 @@ public class FilteredPatternLayout extends PatternLayout
 
     private String getFilteredStacktrace(ThrowableInformation throwableInformation)
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         String[] s = throwableInformation.getThrowableStrRep();
 

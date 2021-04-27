@@ -279,7 +279,7 @@ public class Log4jConfigurationServlet extends HttpServlet
             .out.println("ERROR Setting LOG4J Logger:" + e);
         }
 
-        return "Message Set For " + (logger.getName().equals("") ? ROOT : logger.getName());
+        return "Message Set For " + (logger==null || logger.getName().equals("") ? ROOT : logger.getName());
     }
 
     /**
@@ -292,7 +292,7 @@ public class Log4jConfigurationServlet extends HttpServlet
     {
         Enumeration<Logger> enm = LogManager.getCurrentLoggers();
 
-        List<Logger> list = new ArrayList<Logger>();
+        List<Logger> list = new ArrayList<>();
 
         // Add all current loggers to the list
         while (enm.hasMoreElements())

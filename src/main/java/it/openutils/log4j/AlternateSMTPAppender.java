@@ -172,7 +172,6 @@ public class AlternateSMTPAppender extends AppenderSkeleton
         }
 
         Session session = Session.getInstance(props, null);
-        // session.setDebug(true);
         msg = new MimeMessage(session);
 
         try
@@ -226,11 +225,10 @@ public class AlternateSMTPAppender extends AppenderSkeleton
                 // send immediately
                 synchronized (events)
                 {
-                    Collection<LoggingEventAggregator> le = new ArrayList<LoggingEventAggregator>();
+                    Collection<LoggingEventAggregator> le = new ArrayList<>();
                     le.add(leg);
                     sendBuffer(le);
                 }
-                return;
             }
             else
             {
@@ -249,7 +247,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
                             Collection<LoggingEventAggregator> le;
                             synchronized (events)
                             {
-                                le = new ArrayList<LoggingEventAggregator>(events.values());
+                                le = new ArrayList<>(events.values());
                                 events.clear();
                                 timerTask = null;
                             }
@@ -358,7 +356,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
             {
                 MimeBodyPart part = new MimeBodyPart();
 
-                StringBuffer sbuf = new StringBuffer();
+                StringBuilder sbuf = new StringBuilder();
 
                 LoggingEvent event = lea.getLoggingEvent();
 
