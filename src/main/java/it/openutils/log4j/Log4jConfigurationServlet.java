@@ -279,7 +279,7 @@ public class Log4jConfigurationServlet extends HttpServlet
             .out.println("ERROR Setting LOG4J Logger:" + e);
         }
 
-        return "Message Set For " + (logger.getName().equals("") ? ROOT : logger.getName());
+        return "Message Set For " + (logger!=null && logger.getName().equals("") ? ROOT : logger.getName());
     }
 
     /**
