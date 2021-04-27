@@ -172,7 +172,6 @@ public class AlternateSMTPAppender extends AppenderSkeleton
         }
 
         Session session = Session.getInstance(props, null);
-        // session.setDebug(true);
         msg = new MimeMessage(session);
 
         try

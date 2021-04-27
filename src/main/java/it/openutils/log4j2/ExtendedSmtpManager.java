@@ -238,7 +238,6 @@ public class ExtendedSmtpManager extends AbstractManager
         catch (Exception e)
         {
             LOGGER.error("Error occurred while sending e-mail notification.", e);
-            // throw new LoggingException("Error occurred while sending email", e);
         }
     }
 
