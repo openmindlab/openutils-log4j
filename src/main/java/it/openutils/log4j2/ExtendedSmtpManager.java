@@ -175,6 +175,7 @@ public class ExtendedSmtpManager extends AbstractManager
         catch (InterruptedException e)
         {
             // ignore
+            Thread.currentThread().interrupt();
         }
         checkSendSummary(null); // sending of remaining buffered emails
         return true;
@@ -411,6 +412,7 @@ public class ExtendedSmtpManager extends AbstractManager
                 catch (InterruptedException e)
                 {
                     // ignore, silently end the thread in this case
+                    Thread.currentThread().interrupt();
                 }
                 LOGGER.debug("SMTPx background thread {} ended.", getName());
             } // run()
