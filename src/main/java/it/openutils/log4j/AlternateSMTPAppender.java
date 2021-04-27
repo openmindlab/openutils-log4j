@@ -358,7 +358,7 @@ public class AlternateSMTPAppender extends AppenderSkeleton
             {
                 MimeBodyPart part = new MimeBodyPart();
 
-                StringBuffer sbuf = new StringBuffer();
+                StringBuilder sbuf = new StringBuilder();
 
                 LoggingEvent event = lea.getLoggingEvent();
 

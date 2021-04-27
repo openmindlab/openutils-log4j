@@ -149,7 +149,7 @@ public class FilteredPatternLayout extends PatternLayout
 
     private String getFilteredStacktrace(ThrowableInformation throwableInformation)
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         String[] s = throwableInformation.getThrowableStrRep();
 
