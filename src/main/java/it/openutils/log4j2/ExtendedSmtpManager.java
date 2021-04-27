@@ -74,7 +74,7 @@ import org.apache.logging.log4j.util.PropertiesUtil;
  */
 public class ExtendedSmtpManager extends AbstractManager
 {
-    private static SMTPManagerFactory FACTORY = new SMTPManagerFactory();
+    private static final SMTPManagerFactory FACTORY = new SMTPManagerFactory();
 
     private FactoryData data;
 
