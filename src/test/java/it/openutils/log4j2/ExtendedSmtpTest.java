@@ -83,8 +83,10 @@ public class ExtendedSmtpTest {
 			assertThat(bodyPart.getContent()).isNotNull();
 			log.info("body: {}", bodyPart.getContent());
 
-			assertThat((String) bodyPart.getContent()).startsWith(MATCHING_HEADER);
-			assertThat((String) bodyPart.getContent()).endsWith(MATCHING_FOOTER);
+			assertThat( ((String) bodyPart.getContent()).replace("\r\n","\n"))
+                                .startsWith(MATCHING_HEADER);
+			assertThat(((String) bodyPart.getContent()).replace("\r\n","\n"))
+                                .endsWith(MATCHING_FOOTER);
 		}
 
 	}
