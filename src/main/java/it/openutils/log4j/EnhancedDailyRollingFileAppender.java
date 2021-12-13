@@ -1,7 +1,7 @@
-/**
+/*
  *
  * openutils for Log4j (https://github.com/openmindlab/openutils-log4j)
- * Copyright(C) 2005-2019, Openmind S.r.l. http://www.openmindonline.it
+ * Copyright(C) 2005-2021, https://github.com/openmindlab
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.

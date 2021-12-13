@@ -1,6 +1,6 @@
 
 ${name} (${url})
-Copyright(C) ${year}, Openmind S.r.l. http://www.openmindonline.it
+Copyright(C) ${year}, https://github.com/openmindlab
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.

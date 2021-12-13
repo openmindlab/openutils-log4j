@@ -1,6 +1,6 @@
 # openutils-log4j
 
-[![OpenMindlab logo](https://avatars.githubusercontent.com/u/3875817?s=100)](http://www.openmindlab.com/) 
+[![OpenMindlab logo](https://avatars.githubusercontent.com/u/3875817?s=100)](https://github.com/openmindlab) 
 
 Openutils-log4j is composed by a set of utility for log4j and log4j2.
 This project is supposed to support both log4j and log4j2 features so that:
