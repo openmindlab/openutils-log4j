@@ -4,7 +4,7 @@
 	<groupId>net.sourceforge.openutils</groupId>
 	<artifactId>openutils-log4j</artifactId>
 	<packaging>jar</packaging>
-	<version>3.0.11</version>
+	<version>3.0.12-SNAPSHOT</version>
 	<name>openutils for Log4j</name>
 	<description>Openutils log4j extensions</description>
 	<inceptionYear>2005</inceptionYear>
@@ -18,7 +18,7 @@
 	<scm>
 		<connection>scm:git:https://github.com/openmindlab/openutils-log4j.git</connection>
 		<url>https://github.com/openmindlab/openutils-log4j</url>
-		<tag>openutils-log4j-3.0.11</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<developers>
 		<developer>
